@@ -184,13 +184,17 @@ function highlightSelectedOptions() {
       const nextButton = document.getElementById('next');
       nextButton.innerHTML = '<h1>results</h1>';
 
-      function linkString(linkList) {
+      function linkString(linkList, linkText) {
         let str = ``
         linkList.forEach((link, index) => {
           if (link.length < 1) {
             return "not found";
           }
-          str = str + `<a href="${link}" target="_blank">${link}</a>`;
+          let number = ""
+          if (linkList.length > 1) {
+            number = ` ${index + 1}`
+          }
+          str = str + `<a href="${link}" target="_blank">${linkText}${number}</a>`;
           if (index < linkList.length - 1) {
             str = str + `, `;
           }
@@ -202,22 +206,22 @@ function highlightSelectedOptions() {
       resultContainer.innerHTML = `
         <h2>(1) - ${topRec.name}</h2>
         <p>${topRec.comments}</p>
-        <p>Link: ${linkString(topRec.link)}</p>
-        <p>Wiki: ${linkString(topRec.wiki)}</p>
+        <p>${linkString(topRec.link, "Link")}</p>
+        <p>${linkString(topRec.wiki, "Wiki")}</p>
         <p>  </p>
         <p> - </p>
         <p> </p>
         <h3>(2) - ${secondRec.name}</h3>
         <p>${secondRec.comments}</p>
-        <p>Link: ${linkString(secondRec.link)}</p>
-        <p>Wiki: ${linkString(secondRec.wiki)}</p>
+        <p>${linkString(secondRec.link, "Link")}</p>
+        <p>${linkString(secondRec.wiki, "Wiki")}</p>
         <p>  </p>
         <p> - </p>
         <p> </p>
         <h3>(3) - ${thirdRec.name}</h3>
         <p>${thirdRec.comments}</p>
-        <p>Link: ${linkString(thirdRec.link)}</p>
-        <p>Wiki: ${linkString(thirdRec.wiki)}</p>
+        <p>${linkString(thirdRec.link, "Link")}</p>
+        <p>${linkString(thirdRec.wiki, "Wiki")}</p>
       `;
     }
 
